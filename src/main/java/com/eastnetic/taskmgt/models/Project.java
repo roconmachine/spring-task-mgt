@@ -18,9 +18,19 @@ public class Project {
     @Column(nullable = false)
     private String name;
 
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @Column(nullable = false)
-//    private User user;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(nullable = false)
+    private User user;
+
+    public Project() {
+    }
+
+    public Project(long id, String name, User user){
+        this.id = id;
+        this.name = name;
+        this.user = user;
+
+    }
 
     public long getId() {
         return id;
@@ -38,11 +48,11 @@ public class Project {
         this.name = name;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

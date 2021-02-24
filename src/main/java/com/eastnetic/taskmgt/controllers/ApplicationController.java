@@ -10,23 +10,23 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 public class ApplicationController {
-//
-//    @Autowired
-//    UserRepository userRepository;
-//
-//    public User getApplicationUser(){
-//        String currentUserName = null;
-//        User user;
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-//            currentUserName = authentication.getName();
-//
-//        }
-//
-//        user = userRepository.findByUsername(currentUserName)
-//                .orElseThrow(() ->
-//                        new UsernameNotFoundException("User Not Found with username: ")
-//                );
-//        return user;
-//    }
+
+    @Autowired
+    protected UserRepository userRepository;
+
+    public User getApplicationUser(){
+        String currentUserName = null;
+        User user;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            currentUserName = authentication.getName();
+
+        }
+
+        user = userRepository.findByUsername(currentUserName)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User Not Found with username: ")
+                );
+        return user;
+    }
 }

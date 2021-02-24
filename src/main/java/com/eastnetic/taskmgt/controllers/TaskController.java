@@ -27,7 +27,9 @@ import java.util.Date;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/task")
-public class TaskController{
+public class TaskController
+        extends ApplicationController
+{
 
     @Autowired
     TaskRepository taskRepository;
@@ -35,8 +37,7 @@ public class TaskController{
     @Autowired
     ProjectRepository projectRepository;
 
-    @Autowired
-    UserRepository userRepository;
+
 
 
     @PostMapping(value = "/create", consumes = "application/json")
@@ -52,25 +53,14 @@ public class TaskController{
             return new Response("1001", "Invalid status : " + taskRequest.getStatus());
         }
 
-        String currentUserName = null;
-        User user;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            currentUserName = authentication.getName();
-
-        }
-
-
         try{
             Project project = projectRepository.findById(taskRequest.getProjectId());
-            user = userRepository.findByUsername(currentUserName)
-                    .orElseThrow(() ->
-                            new UsernameNotFoundException("User Not Found with username: ")
-                    );
+
             taskRepository.save(new Task(taskRequest.getDescription(),
                     Status.valueOf(taskRequest.getStatus()),
                     taskRequest.getDueDate(),
-                    project
+                    project,
+                    super.getApplicationUser()
             ));
 
         }

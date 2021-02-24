@@ -1,16 +1,18 @@
 package com.eastnetic.taskmgt.models;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(	name = "tasks")
+@EnableAutoConfiguration
+@Table(name = "tasks")
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
 
     @Column(nullable = false)
     private String description;
@@ -27,16 +29,18 @@ public class Task {
     private Project project;
 
 
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(nullable = false)
-//    private User user;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(nullable = false)
+    private User user;
 
 
-    public Task(String description, Status status, Date dueDate, Project project) {
+    public Task(String description, Status status, Date dueDate, Project project,User user) {
         this.description = description;
         this.status = status;
         this.dueDate = dueDate;
         this.project = project;
+        this.user = user;
     }
 
     public Task() {
@@ -83,11 +87,11 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

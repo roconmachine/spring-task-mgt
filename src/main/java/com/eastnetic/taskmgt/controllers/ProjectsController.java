@@ -22,14 +22,13 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/project")
 public class ProjectsController
-//        extends ApplicationController
+        extends ApplicationController
 {
 
     @Autowired
     ProjectRepository projectRepository;
 
-//    @Autowired
-//    UserRepository userRepository;
+
 
     @PostMapping(value = "/create", produces = "application/json")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
@@ -42,10 +41,9 @@ public class ProjectsController
         Project project = null;
 
         try{
-            //User user = super.getApplicationUser();
             project = new Project();
             project.setName(projectRequest.getName());
-            //project.setUser(user);
+            project.setUser(super.getApplicationUser());
             projectRepository.save(project);
 
         }
