@@ -15,4 +15,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findAllByProjectIdIs(long project);
     List<Task> findAllByDueDateBefore(Date dueDate);
     List<Task> findAllByUserId(long id);
+
 }

@@ -17,4 +17,5 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
     void delete(Project project);
     List<Project> findAll();
     Project findById(long id);
+    List<Project> findAllByUserId(long id);
 }

@@ -8,6 +8,7 @@ import com.eastnetic.taskmgt.payload.request.ProjectRequest;
 import com.eastnetic.taskmgt.payload.response.MessageResponse;
 import com.eastnetic.taskmgt.payload.response.ProjectResponse;
 import com.eastnetic.taskmgt.payload.response.Response;
+import com.eastnetic.taskmgt.payload.response.TaskResponse;
 import com.eastnetic.taskmgt.repository.ProjectRepository;
 import com.eastnetic.taskmgt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,5 +94,20 @@ public class ProjectsController
         projectResponse.setListProjects(projectRepository.findAll());
 
         return projectResponse;
+    }
+
+
+    @GetMapping(value = "/getAllProjectsByUser/{userid}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ProjectResponse getAllProjectsByUser(@PathVariable("userid") long id){
+
+        ProjectResponse response = new ProjectResponse();
+        try {
+            response.setListProjects(projectRepository.findAllByUserId(id));
+        }catch (Exception exception){
+            return new ProjectResponse("9999", "System failure");
+        }
+        return response;
+
     }
 }

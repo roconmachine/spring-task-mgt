@@ -6,6 +6,7 @@ import com.eastnetic.taskmgt.models.Status;
 import com.eastnetic.taskmgt.models.Task;
 import com.eastnetic.taskmgt.models.User;
 import com.eastnetic.taskmgt.payload.request.TaskRequest;
+import com.eastnetic.taskmgt.payload.response.ProjectResponse;
 import com.eastnetic.taskmgt.payload.response.Response;
 import com.eastnetic.taskmgt.payload.response.TaskResponse;
 import com.eastnetic.taskmgt.repository.ProjectRepository;
@@ -189,9 +190,6 @@ public class TaskController
         }
         return response;
     }
-
-
-
 
 
 }
