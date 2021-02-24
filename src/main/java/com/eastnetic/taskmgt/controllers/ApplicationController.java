@@ -1,6 +1,8 @@
 package com.eastnetic.taskmgt.controllers;
 
 import com.eastnetic.taskmgt.models.User;
+import com.eastnetic.taskmgt.repository.ProjectRepository;
+import com.eastnetic.taskmgt.repository.TaskRepository;
 import com.eastnetic.taskmgt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -13,6 +15,12 @@ public class ApplicationController {
 
     @Autowired
     protected UserRepository userRepository;
+
+    @Autowired
+    protected TaskRepository taskRepository;
+
+    @Autowired
+    protected ProjectRepository projectRepository;
 
     public User getApplicationUser(){
         String currentUserName = null;

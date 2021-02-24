@@ -31,15 +31,6 @@ public class TaskController
         extends ApplicationController
 {
 
-    @Autowired
-    TaskRepository taskRepository;
-
-    @Autowired
-    ProjectRepository projectRepository;
-
-
-
-
     @PostMapping(value = "/create", consumes = "application/json")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public Response create(@Valid @RequestBody TaskRequest taskRequest) {
@@ -186,17 +177,20 @@ public class TaskController
     }
 
 
-    @GetMapping(value = "/getAllTaskByUser/{username}")
+    @GetMapping(value = "/getAllTaskByUser/{userid}")
     @PreAuthorize("hasRole('ADMIN')")
-    public TaskResponse getallTasksByUser(@PathVariable("username") String userId){
+    public TaskResponse getallTasksByUser(@PathVariable("userid") long userId){
 
+        TaskResponse response = new TaskResponse();
         try {
-
+            response.setTasks(taskRepository.findAllByUserId(userId));
         }catch (Exception exception){
-
+           return new TaskResponse("9999", "System failure");
         }
-        return null;
+        return response;
     }
+
+
 
 
 
