@@ -27,16 +27,27 @@ Authorization:<access token>
 api/auth/signin
 
 /api/project/create#    //create new project
+
 /api/project/all        //get all projects
+
 /api/task/create
+
 api/task/all
+
 /api/task/edit
+
 /api/task/get/{taskid}
+
 /api/task/get/pId={projectid}
+
 task/get/status={status : OPEN, CLOSE, IN_PROGRESS}
+
 /task/get/dDate
+
 /api/task/getAllTaskByUser/{userid}
+
 /api/project/getAllProjectsByUser/{userid}
+
 
 
 
