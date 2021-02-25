@@ -1,18 +1,9 @@
 package com.eastnetic.taskmgt.controllers;
 
-
 import com.eastnetic.taskmgt.models.Project;
-import com.eastnetic.taskmgt.models.User;
-import com.eastnetic.taskmgt.payload.request.LoginRequest;
 import com.eastnetic.taskmgt.payload.request.ProjectRequest;
-import com.eastnetic.taskmgt.payload.response.MessageResponse;
 import com.eastnetic.taskmgt.payload.response.ProjectResponse;
 import com.eastnetic.taskmgt.payload.response.Response;
-import com.eastnetic.taskmgt.payload.response.TaskResponse;
-import com.eastnetic.taskmgt.repository.ProjectRepository;
-import com.eastnetic.taskmgt.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +16,6 @@ import javax.validation.Valid;
 public class ProjectsController
         extends ApplicationController
 {
-
-    @Autowired
-    ProjectRepository projectRepository;
 
 
 
@@ -93,7 +81,7 @@ public class ProjectsController
 
         projectResponse.setListProjects(projectRepository.findAll());
 
-        return projectResponse;
+        return super.filterProjectResponse(projectResponse);
     }
 
 
@@ -107,7 +95,7 @@ public class ProjectsController
         }catch (Exception exception){
             return new ProjectResponse("9999", "System failure");
         }
-        return response;
+        return super.filterProjectResponse(response);
 
     }
 }

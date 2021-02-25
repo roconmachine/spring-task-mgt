@@ -81,7 +81,22 @@ public class TaskController
         }
 
 
-        return response;
+        return super.filterTaskResponse(response);
+    }
+
+    @GetMapping(value = "/all")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public TaskResponse getById(){
+
+        TaskResponse response = new TaskResponse();
+        try{
+            response.setTasks(taskRepository.findAll());
+        }catch (Exception exception) {
+            new TaskResponse("9999", "System failure");
+        }
+
+
+        return super.filterTaskResponse(response);
     }
 
     @GetMapping(value = "/get/pId={project_id}")
@@ -95,7 +110,7 @@ public class TaskController
         }catch (Exception exception) {
             new TaskResponse("9999", "System failure");
         }
-        return response;
+        return super.filterTaskResponse(response);
     }
 
     @GetMapping(value = "/get/status={status}")
@@ -117,7 +132,7 @@ public class TaskController
         }catch (Exception exception) {
             new TaskResponse("9999", "System failure");
         }
-        return response;
+        return super.filterTaskResponse(response);
     }
 
     @GetMapping(value = "/get/dDate")
@@ -131,7 +146,7 @@ public class TaskController
         }catch (Exception exception) {
             new TaskResponse("9999", "System failure");
         }
-        return response;
+        return super.filterTaskResponse(response);
     }
 
 
@@ -188,7 +203,7 @@ public class TaskController
         }catch (Exception exception){
            return new TaskResponse("9999", "System failure");
         }
-        return response;
+        return super.filterTaskResponse(response);
     }
 
 
