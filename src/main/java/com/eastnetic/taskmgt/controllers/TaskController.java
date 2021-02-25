@@ -149,6 +149,20 @@ public class TaskController
         return super.filterTaskResponse(response);
     }
 
+    @GetMapping(value = "/get/dDateNotClose")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public TaskResponse getByDueDateNotClose(){
+
+
+        TaskResponse response = new TaskResponse();
+        try{
+            response.setTasks(taskRepository.findAllByDueDateBeforeAndStatusNot(Calendar.getInstance().getTime(), Status.CLOSE.toString()));
+        }catch (Exception exception) {
+            new TaskResponse("9999", "System failure");
+        }
+        return super.filterTaskResponse(response);
+    }
+
 
     @PostMapping(value = "/edit", consumes = "application/json")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")

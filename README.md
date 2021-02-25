@@ -5,7 +5,9 @@
 configure data source in application.properties
 
 spring.datasource.url= jdbc:mysql://localhost:3306/{db_name}?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+
 spring.datasource.username= ****
+
 spring.datasource.password= ********
 
 
@@ -17,6 +19,7 @@ https://www.getpostman.com/collections/52a0e6a3c88238aa4bfc
 # Check Initial Data
 
 INSERT INTO roles(name) VALUES('ROLE_USER');
+
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 
 # API Test 
